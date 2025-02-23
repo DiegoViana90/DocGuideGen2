@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FlyoutPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:views="clr-namespace:DocGuideGen2.Views"
+    x:Class="DocGuideGen2.Views.MainFlyoutPage"
+    FlyoutLayoutBehavior="Popover">
+
+    <FlyoutPage.Flyout>
+        <ContentPage Title="Menu">
+            <VerticalStackLayout Padding="10" Spacing="10">
+
+                <!-- Botão fixo "Guia turistico" para alternar a exibição das opções -->
+                <Button x:Name="ToggleExpanderButton" 
+                        Text="Guia turistico" 
+                        Clicked="OnToggleExpanderClicked"/>
+
+                <!-- Expander sem cabeçalho visível -->
+                <toolkit:Expander x:Name="OptionsExpander" IsExpanded="False">
+                    <toolkit:Expander.Header>
+                        <!-- Cabeçalho vazio -->
+                        <ContentView />
+                    </toolkit:Expander.Header>
+                    <toolkit:Expander.Content>
+                        <VerticalStackLayout Spacing="5">
+                            <Button Text="Adicionar Guia"
+                                    FontSize="12"
+                                    Padding="5"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="200"
+                                    Clicked="OnOption1Clicked"/>
+                            <Button Text="Exibir Guias"
+                                    FontSize="12"
+                                    Padding="5"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="200"
+                                    Clicked="OnOption2Clicked"/>
+                            <Button Text="Editar Guia"
+                                    FontSize="12"
+                                    Padding="5"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="200"
+                                    Clicked="OnOption2Clicked"/>
+                            <Button Text="Excluir Guia"
+                                    FontSize="12"
+                                    Padding="5"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="200"
+                                    Clicked="OnOption2Clicked"/>
+                        </VerticalStackLayout>
+                    </toolkit:Expander.Content>
+                </toolkit:Expander>
+            </VerticalStackLayout>
+        </ContentPage>
+    </FlyoutPage.Flyout>
+
+    <FlyoutPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <views:HomeView />
+            </x:Arguments>
+        </NavigationPage>
+    </FlyoutPage.Detail>
+</FlyoutPage>

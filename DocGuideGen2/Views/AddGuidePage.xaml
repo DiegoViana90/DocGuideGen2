@@ -3,19 +3,23 @@
     x:Class="DocGuideGen2.Views.AddGuidePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:DocGuideGen2.Converters"
     Title="Add Guide">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringEqualsConverter x:Key="StringEqualsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <!--  Cabeçalho fixo  -->
             <RowDefinition Height="Auto" />
-            <!--  Área com os inputs  -->
             <RowDefinition Height="*" />
-            <!--  Área dos botões  -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--  Cabeçalho da página  -->
+        <!--  Cabeçalho  -->
         <Label
             Padding="10"
             FontSize="20"
@@ -23,7 +27,7 @@
             Text="Adicionar Guia"
             VerticalOptions="Start" />
 
-        <!--  Área de inputs com scroll  -->
+        <!--  Área de inputs  -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout
                 Padding="20"
@@ -31,72 +35,64 @@
                 Spacing="20"
                 VerticalOptions="CenterAndExpand">
 
-                <!--  Input para o nome do guia  -->
+                <!--  Nome do Guia  -->
                 <VerticalStackLayout Spacing="2">
                     <Label HorizontalOptions="Start" Text="Digite o nome do Guia/Assistente" />
                     <Entry
-                        x:Name="NameEntry"
-                        HorizontalOptions="Start"
                         Placeholder="Nome"
-                        TextChanged="OnEntryTextChanged"
+                        Text="{Binding Name}"
                         WidthRequest="300" />
                 </VerticalStackLayout>
 
-                <!--  Input para o registro do guia  -->
+                <!--  Registro do Guia  -->
                 <VerticalStackLayout Spacing="2">
                     <Label HorizontalOptions="Start" Text="Digite o registro do Guia/Assistente:" />
                     <Entry
-                        x:Name="RegistryEntry"
-                        HorizontalOptions="Start"
                         Placeholder="Registro"
-                        TextChanged="OnEntryTextChanged"
+                        Text="{Binding Registry}"
                         WidthRequest="300" />
                 </VerticalStackLayout>
 
-                <!--  Input para o RUT do guia  -->
+                <!--  RUT do Guia  -->
                 <VerticalStackLayout Spacing="2">
                     <Label HorizontalOptions="Start" Text="Digite o RUT do Guia/Assistente:" />
                     <Entry
-                        x:Name="RutEntry"
-                        HorizontalOptions="Start"
                         Placeholder="RUT"
-                        TextChanged="OnEntryTextChanged"
+                        Text="{Binding Rut}"
                         WidthRequest="300" />
                 </VerticalStackLayout>
 
-                <!--  Opções de escolha (Guia / Assistente) usando RadioButton  -->
+                <!--  Opções de escolha (Guia/Assistente)  -->
                 <VerticalStackLayout Spacing="2">
                     <Label HorizontalOptions="Start" Text="Escolha uma opção:" />
                     <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
                         <RadioButton
-                            x:Name="GuideRadioButton"
-                            CheckedChanged="OnRadioButtonCheckedChanged"
                             Content="Guia"
                             GroupName="RoleGroup"
-                            IsChecked="False"
-                            Value="Guia" />
+                            IsChecked="{Binding SelectedRole, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Guide}" />
+
                         <RadioButton
-                            x:Name="AssistantRadioButton"
-                            CheckedChanged="OnRadioButtonCheckedChanged"
                             Content="Assistente de Guia"
                             GroupName="RoleGroup"
-                            IsChecked="False"
-                            Value="Assistente" />
+                            IsChecked="{Binding SelectedRole, Converter={StaticResource StringEqualsConverter}, ConverterParameter=Assistant}" />
                     </HorizontalStackLayout>
+
+
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
 
-        <!--  Área dos botões  -->
+        <!--  Botões  -->
         <HorizontalStackLayout
             Grid.Row="2"
             Padding="10"
             HorizontalOptions="Center"
             Spacing="20">
+
             <!--  Botão Fechar  -->
             <Button
                 BackgroundColor="Gray"
-                Clicked="OnCloseClicked"
+                Command="{Binding CloseCommand}"
                 Text="Fechar"
                 TextColor="White">
                 <VisualStateManager.VisualStateGroups>
@@ -117,11 +113,10 @@
                 </VisualStateManager.VisualStateGroups>
             </Button>
 
-            <!--  Botão Confirm desativado inicialmente  -->
+            <!--  Botão Confirmar  -->
             <Button
-                x:Name="ConfirmButton"
-                Clicked="OnConfirmClicked"
-                IsEnabled="False"
+                Command="{Binding ConfirmCommand}"
+                IsEnabled="{Binding IsFormValid}"
                 Text="Confirm" />
         </HorizontalStackLayout>
     </Grid>

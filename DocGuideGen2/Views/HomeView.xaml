@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage 
+<ContentPage
+    x:Class="DocGuideGen2.Views.HomeView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="DocGuideGen2.Views.HomeView"
     Title="Página Inicial">
 
-    <VerticalStackLayout
-        Padding="20"
-        Spacing="10">
+    <VerticalStackLayout Padding="20" Spacing="10">
 
         <Label
-            Text="Bem-vindo ao WeLoveChile - GuideGen"
             FontSize="24"
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"
+            Text="Bem-vindo ao WeLoveChile - GuideGen" />
 
     </VerticalStackLayout>
 

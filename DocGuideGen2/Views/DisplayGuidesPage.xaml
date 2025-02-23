@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DocGuideGen2.Views.DisplayGuidesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Exibir Guias">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <Label
+            FontSize="24"
+            HorizontalOptions="Center"
+            Text="Lista de Guias" />
+
+        <!--  Placeholder for guides list  -->
+        <Label
+            FontSize="16"
+            HorizontalOptions="Center"
+            Text="(Os guias serão exibidos aqui...)"
+            VerticalOptions="CenterAndExpand" />
+
+        <!--  Back button  -->
+        <Button
+            Clicked="OnBackClicked"
+            HorizontalOptions="Center"
+            Text="Voltar" />
+    </VerticalStackLayout>
+</ContentPage>

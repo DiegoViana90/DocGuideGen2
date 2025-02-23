@@ -42,21 +42,6 @@
                                 HorizontalOptions="Center"
                                 Text="Exibir Guias"
                                 WidthRequest="200" />
-
-                            <Button
-                                Padding="5"
-                                Clicked="OnOption2Clicked"
-                                FontSize="12"
-                                HorizontalOptions="Center"
-                                Text="Exibir Guias"
-                                WidthRequest="200" />
-                            <Button
-                                Padding="5"
-                                Clicked="OnOption2Clicked"
-                                FontSize="12"
-                                HorizontalOptions="Center"
-                                Text="Excluir Guia"
-                                WidthRequest="200" />
                         </VerticalStackLayout>
                     </toolkit:Expander.Content>
                 </toolkit:Expander>

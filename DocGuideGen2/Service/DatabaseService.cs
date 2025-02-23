@@ -1,6 +1,8 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Data.Sqlite;
+using DocGuideGen2.Models;
 
 namespace DocGuideGen2.Services
 {
@@ -37,7 +39,7 @@ namespace DocGuideGen2.Services
             }
         }
 
-        // Method to check if a guide already exists
+        // ✅ Check if a guide already exists
         public async Task<bool> GuideExistsAsync(string name)
         {
             using (var connection = new SqliteConnection($"Data Source={_dbPath}"))
@@ -57,7 +59,7 @@ namespace DocGuideGen2.Services
             }
         }
 
-        // Method to add a new guide
+        // ✅ Add a new guide
         public async Task AddGuideAsync(string name, string registry, string rut, int type)
         {
             using (var connection = new SqliteConnection($"Data Source={_dbPath}"))
@@ -75,6 +77,45 @@ namespace DocGuideGen2.Services
                     await command.ExecuteNonQueryAsync();
                 }
             }
+        }
+
+        // ✅ Get guides based on filter
+        public async Task<List<Guide>> GetGuidesByFilterAsync(string filter)
+        {
+            var guides = new List<Guide>();
+
+            using (var connection = new SqliteConnection($"Data Source={_dbPath}"))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT * FROM guide";
+                if (filter == "Guia")
+                {
+                    query += " WHERE type = 1";
+                }
+                else if (filter == "Assistente de Guia")
+                {
+                    query += " WHERE type = 2";
+                }
+
+                using (var command = new SqliteCommand(query, connection))
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        guides.Add(new Guide
+                        {
+                            Id = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            Registry = reader.GetString(2),
+                            Rut = reader.GetString(3),
+                            Type = reader.GetInt32(4)
+                        });
+                    }
+                }
+            }
+
+            return guides;
         }
     }
 }

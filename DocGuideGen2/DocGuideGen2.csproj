@@ -71,10 +71,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ViewModels\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Compile Update="Views\MainFlyoutPage.xaml.cs">
 	    <DependentUpon>MainFlyoutPage.xaml</DependentUpon>
 	  </Compile>

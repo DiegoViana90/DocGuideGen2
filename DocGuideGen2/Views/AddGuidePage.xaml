@@ -25,40 +25,45 @@
         <!-- Área de inputs com scroll -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout
-        HorizontalOptions="Center"
-        VerticalOptions="CenterAndExpand"
-        Spacing="20"
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand"
+                Spacing="20"
                 Padding="20">
 
                 <!-- Input para o nome do guia -->
                 <VerticalStackLayout Spacing="2">
-                    <!-- Espaço pequeno entre Label e Entry -->
                     <Label Text="Digite o nome do Guia/Assistente" HorizontalOptions="Start" />
-                    <Entry Placeholder="Nome" HorizontalOptions="Start" WidthRequest="300" />
+                    <Entry x:Name="NameEntry" Placeholder="Nome" HorizontalOptions="Start" WidthRequest="300" TextChanged="OnEntryTextChanged" />
                 </VerticalStackLayout>
 
                 <!-- Input para o registro do guia -->
                 <VerticalStackLayout Spacing="2">
                     <Label Text="Digite o registro do Guia/Assistente:" HorizontalOptions="Start" />
-                    <Entry Placeholder="Registro" HorizontalOptions="Start" WidthRequest="300" />
+                    <Entry x:Name="RegistryEntry" Placeholder="Registro" HorizontalOptions="Start" WidthRequest="300" TextChanged="OnEntryTextChanged" />
                 </VerticalStackLayout>
 
                 <!-- Input para o RUT do guia -->
                 <VerticalStackLayout Spacing="2">
                     <Label Text="Digite o RUT do Guia/Assistente:" HorizontalOptions="Start" />
-                    <Entry Placeholder="RUT" HorizontalOptions="Start" WidthRequest="300" />
+                    <Entry x:Name="RutEntry" Placeholder="RUT" HorizontalOptions="Start" WidthRequest="300" TextChanged="OnEntryTextChanged" />
                 </VerticalStackLayout>
 
                 <!-- Opções de escolha (Guia / Assistente) usando RadioButton -->
                 <VerticalStackLayout Spacing="2">
                     <Label Text="Escolha uma opção:" HorizontalOptions="Start" />
                     <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                        <RadioButton Content="Guia"
-                             GroupName="RoleGroup"
-                             Value="Guia" />
-                        <RadioButton Content="Assistente de Guia"
-                             GroupName="RoleGroup"
-                             Value="Assistente" />
+                        <RadioButton x:Name="GuideRadioButton"
+                                     Content="Guia"
+                                     GroupName="RoleGroup"
+                                     Value="Guia"
+                                     IsChecked="False"
+                                     CheckedChanged="OnRadioButtonCheckedChanged" />
+                        <RadioButton x:Name="AssistantRadioButton"
+                                     Content="Assistente de Guia"
+                                     GroupName="RoleGroup"
+                                     Value="Assistente"
+                                     IsChecked="False"
+                                     CheckedChanged="OnRadioButtonCheckedChanged" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </VerticalStackLayout>
@@ -69,34 +74,34 @@
                                Padding="10" 
                                Spacing="20"
                                HorizontalOptions="Center">
-            <!-- Botão Fechar com estilo que muda de cinza para vermelho no PointerOver -->
+            <!-- Botão Fechar -->
             <Button Text="Fechar"
-        Clicked="OnCloseClicked"
-        TextColor="White"
-        BackgroundColor="Gray">
+                    Clicked="OnCloseClicked"
+                    TextColor="White"
+                    BackgroundColor="Gray">
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="CommonStates">
                         <VisualState x:Name="Normal">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor" Value="Gray"/>
                                 <Setter Property="TextColor" Value="White"/>
-                                <!-- Cor padrão do texto -->
                             </VisualState.Setters>
                         </VisualState>
                         <VisualState x:Name="PointerOver">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor" Value="Red"/>
                                 <Setter Property="TextColor" Value="Black"/>
-                                <!-- Cor do texto ao passar o mouse -->
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
             </Button>
 
-
-            <!-- Botão Confirm sem funcionalidade implementada -->
-            <Button Text="Confirm" Clicked="OnConfirmClicked"/>
+            <!-- Botão Confirm desativado inicialmente -->
+            <Button x:Name="ConfirmButton"
+                    Text="Confirm"
+                    Clicked="OnConfirmClicked"
+                    IsEnabled="False" />
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>

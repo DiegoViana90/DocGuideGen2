@@ -2,16 +2,101 @@
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="DocGuideGen2.Views.AddGuidePage">
+    x:Class="DocGuideGen2.Views.AddGuidePage"
+    Title="Add Guide">
 
-    <VerticalStackLayout
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Cabeçalho fixo -->
+            <RowDefinition Height="Auto" />
+            <!-- Área com os inputs -->
+            <RowDefinition Height="*" />
+            <!-- Área dos botões -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Cabeçalho da página -->
+        <Label Text="Adicionar Guia"
+               FontSize="20"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Padding="10" />
+
+        <!-- Área de inputs com scroll -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout
         HorizontalOptions="Center"
-        VerticalOptions="CenterAndExpand">
+        VerticalOptions="CenterAndExpand"
+        Spacing="20"
+                Padding="20">
 
-        <Label 
-            Text="Add Guide Page"
-            FontSize="20"
-            HorizontalOptions="Center" />
+                <!-- Input para o nome do guia -->
+                <VerticalStackLayout Spacing="2">
+                    <!-- Espaço pequeno entre Label e Entry -->
+                    <Label Text="Digite o nome do Guia/Assistente" HorizontalOptions="Start" />
+                    <Entry Placeholder="Nome" HorizontalOptions="Start" WidthRequest="300" />
+                </VerticalStackLayout>
 
-    </VerticalStackLayout>
+                <!-- Input para o registro do guia -->
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Digite o registro do Guia/Assistente:" HorizontalOptions="Start" />
+                    <Entry Placeholder="Registro" HorizontalOptions="Start" WidthRequest="300" />
+                </VerticalStackLayout>
+
+                <!-- Input para o RUT do guia -->
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Digite o RUT do Guia/Assistente:" HorizontalOptions="Start" />
+                    <Entry Placeholder="RUT" HorizontalOptions="Start" WidthRequest="300" />
+                </VerticalStackLayout>
+
+                <!-- Opções de escolha (Guia / Assistente) usando RadioButton -->
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Escolha uma opção:" HorizontalOptions="Start" />
+                    <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                        <RadioButton Content="Guia"
+                             GroupName="RoleGroup"
+                             Value="Guia" />
+                        <RadioButton Content="Assistente de Guia"
+                             GroupName="RoleGroup"
+                             Value="Assistente" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Área dos botões -->
+        <HorizontalStackLayout Grid.Row="2" 
+                               Padding="10" 
+                               Spacing="20"
+                               HorizontalOptions="Center">
+            <!-- Botão Fechar com estilo que muda de cinza para vermelho no PointerOver -->
+            <Button Text="Fechar"
+        Clicked="OnCloseClicked"
+        TextColor="White"
+        BackgroundColor="Gray">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Gray"/>
+                                <Setter Property="TextColor" Value="White"/>
+                                <!-- Cor padrão do texto -->
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Red"/>
+                                <Setter Property="TextColor" Value="Black"/>
+                                <!-- Cor do texto ao passar o mouse -->
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Button>
+
+
+            <!-- Botão Confirm sem funcionalidade implementada -->
+            <Button Text="Confirm" Clicked="OnConfirmClicked"/>
+        </HorizontalStackLayout>
+    </Grid>
 </ContentPage>

@@ -46,9 +46,9 @@
       Forçamos Microsoft.Maui.Controls a usar 9.0.30,
       satisfazendo a exigência do CommunityToolkit.Maui (>= 9.0.30).
     -->
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.30" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="11.1.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+	  <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.30" />
+	  <PackageReference Include="CommunityToolkit.Maui" Version="11.1.0" />
+	  <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -74,6 +74,12 @@
 	  <Compile Update="Views\MainFlyoutPage.xaml.cs">
 	    <DependentUpon>MainFlyoutPage.xaml</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Views\AddGuidePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
 	</ItemGroup>
 
 	<!-- Exemplo de como você está atualizando XAML de uma pasta Views -->

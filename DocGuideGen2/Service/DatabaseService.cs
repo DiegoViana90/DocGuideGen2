@@ -119,6 +119,7 @@ namespace DocGuideGen2.Services
         }
 
         // ✅ Atualizar guia existente
+        // ✅ Atualizar guia existente 
         public async Task<bool> UpdateGuideAsync(Guide guide)
         {
             using (var connection = new SqliteConnection($"Data Source={_dbPath}"))
@@ -126,19 +127,19 @@ namespace DocGuideGen2.Services
                 await connection.OpenAsync();
 
                 string updateQuery = @"
-            UPDATE guide
-            SET name = @name,
-                registry = @registry,
-                rut = @rut,
-                type = @type
-            WHERE id = @id";
+        UPDATE guide
+        SET name = @name,
+            registry = @registry,
+            rut = @rut,
+            type = @type
+        WHERE id = @id";
 
                 using (var command = new SqliteCommand(updateQuery, connection))
                 {
                     command.Parameters.AddWithValue("@name", guide.Name);
                     command.Parameters.AddWithValue("@registry", guide.Registry);
                     command.Parameters.AddWithValue("@rut", guide.Rut);
-                    command.Parameters.AddWithValue("@type", guide.Type);
+                    command.Parameters.AddWithValue("@type", guide.Type); // Aqui é o campo de tipo
                     command.Parameters.AddWithValue("@id", guide.Id);
 
                     int rowsAffected = await command.ExecuteNonQueryAsync();
@@ -146,6 +147,7 @@ namespace DocGuideGen2.Services
                 }
             }
         }
+
 
     }
 }

@@ -67,6 +67,8 @@ namespace DocGuideGen2.ViewModels
             }
         }
 
+
+
         private async void Cancel()
         {
             await Application.Current.MainPage.Navigation.PopModalAsync();

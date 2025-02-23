@@ -31,9 +31,19 @@ namespace DocGuideGen2.Views
                 int guideType = _selectedRole == "Guide" ? 1 : 2;
                 string guideRole = guideType == 1 ? "Guia" : "Assistente de Guia";
 
+                // Check if the guide already exists
+                bool guideExists = await _databaseService.GuideExistsAsync(NameEntry.Text);
+
+                if (guideExists)
+                {
+                    await DisplayAlert("Aviso", $"{guideRole} {NameEntry.Text} já está adicionado ao banco.", "OK");
+                    return;
+                }
+
+                // Add the guide
                 await _databaseService.AddGuideAsync(NameEntry.Text, RegistryEntry.Text, RutEntry.Text, guideType);
 
-                // Dynamic message in Portuguese for the user
+                // Success message
                 await DisplayAlert("Sucesso", $"{guideRole} {NameEntry.Text} adicionado ao banco.", "OK");
 
                 // Clear fields after adding

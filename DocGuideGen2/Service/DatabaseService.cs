@@ -37,6 +37,27 @@ namespace DocGuideGen2.Services
             }
         }
 
+        // Method to check if a guide already exists
+        public async Task<bool> GuideExistsAsync(string name)
+        {
+            using (var connection = new SqliteConnection($"Data Source={_dbPath}"))
+            {
+                await connection.OpenAsync();
+                string query = "SELECT COUNT(*) FROM guide WHERE name = @name";
+
+                using (var command = new SqliteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@name", name);
+
+                    var result = await command.ExecuteScalarAsync();
+                    int count = Convert.ToInt32(result);
+
+                    return count > 0;
+                }
+            }
+        }
+
+        // Method to add a new guide
         public async Task AddGuideAsync(string name, string registry, string rut, int type)
         {
             using (var connection = new SqliteConnection($"Data Source={_dbPath}"))

@@ -29,10 +29,12 @@ namespace DocGuideGen2.Views
             try
             {
                 int guideType = _selectedRole == "Guide" ? 1 : 2;
+                string guideRole = guideType == 1 ? "Guia" : "Assistente de Guia";
 
                 await _databaseService.AddGuideAsync(NameEntry.Text, RegistryEntry.Text, RutEntry.Text, guideType);
 
-                await DisplayAlert("Success", "Guia Adicionado ao banco", "OK");
+                // Dynamic message in Portuguese for the user
+                await DisplayAlert("Sucesso", $"{guideRole} {NameEntry.Text} adicionado ao banco.", "OK");
 
                 // Clear fields after adding
                 NameEntry.Text = string.Empty;
@@ -46,7 +48,7 @@ namespace DocGuideGen2.Views
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"Failed to add guide: {ex.Message}", "OK");
+                await DisplayAlert("Erro", $"Falha ao adicionar guia: {ex.Message}", "OK");
             }
         }
 

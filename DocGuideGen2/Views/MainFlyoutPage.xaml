@@ -10,16 +10,18 @@
     <FlyoutPage.Flyout>
         <ContentPage Title="Menu">
             <VerticalStackLayout Padding="10" Spacing="10">
-
-                <!-- Botão fixo "Guia turistico" para alternar a exibição das opções -->
+                <Button x:Name="Home" 
+                        Text="Home" 
+                        Clicked="HomeView"/>
+                <!-- Fixed button "Tourist Guide" to toggle options -->
                 <Button x:Name="ToggleExpanderButton" 
-                        Text="Guia turistico" 
+                        Text="Guia Turístico" 
                         Clicked="OnToggleExpanderClicked"/>
 
-                <!-- Expander sem cabeçalho visível -->
+                <!-- Expander without a visible header -->
                 <toolkit:Expander x:Name="OptionsExpander" IsExpanded="False">
                     <toolkit:Expander.Header>
-                        <!-- Cabeçalho vazio -->
+                        <!-- Empty header -->
                         <ContentView />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
@@ -29,14 +31,14 @@
                                     Padding="5"
                                     HorizontalOptions="Center"
                                     WidthRequest="200"
-                                    Clicked="OnOption1Clicked"/>
+                                    Clicked="AddGuideView"/>
                             <Button Text="Exibir Guias"
                                     FontSize="12"
                                     Padding="5"
                                     HorizontalOptions="Center"
                                     WidthRequest="200"
                                     Clicked="OnOption2Clicked"/>
-                            <Button Text="Editar Guia"
+                            <Button Text="Exibir Guias"
                                     FontSize="12"
                                     Padding="5"
                                     HorizontalOptions="Center"

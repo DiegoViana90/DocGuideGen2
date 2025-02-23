@@ -2,6 +2,7 @@
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using CommunityToolkit.Maui; // Importa o MAUI Community Toolkit
+using CommunityToolkit.Maui;
 
 namespace DocGuideGen2
 {

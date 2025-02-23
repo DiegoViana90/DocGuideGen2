@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DocGuideGen2.Views.AddGuidePage"
+    Title="Add Guide">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Cabeçalho fixo -->
+            <RowDefinition Height="Auto" />
+            <!-- Área com os inputs -->
+            <RowDefinition Height="*" />
+            <!-- Área dos botões -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Cabeçalho da página -->
+        <Label Text="Adicionar Guia"
+               FontSize="20"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Padding="10" />
+
+        <!-- Área de inputs com scroll -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand"
+                Spacing="20"
+                Padding="20">
+
+                <!-- Input para o nome do guia -->
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Digite o nome do Guia/Assistente" HorizontalOptions="Start" />
+                    <Entry x:Name="NameEntry" Placeholder="Nome" HorizontalOptions="Start" WidthRequest="300" TextChanged="OnEntryTextChanged" />
+                </VerticalStackLayout>
+
+                <!-- Input para o registro do guia -->
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Digite o registro do Guia/Assistente:" HorizontalOptions="Start" />
+                    <Entry x:Name="RegistryEntry" Placeholder="Registro" HorizontalOptions="Start" WidthRequest="300" TextChanged="OnEntryTextChanged" />
+                </VerticalStackLayout>
+
+                <!-- Input para o RUT do guia -->
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Digite o RUT do Guia/Assistente:" HorizontalOptions="Start" />
+                    <Entry x:Name="RutEntry" Placeholder="RUT" HorizontalOptions="Start" WidthRequest="300" TextChanged="OnEntryTextChanged" />
+                </VerticalStackLayout>
+
+                <!-- Opções de escolha (Guia / Assistente) usando RadioButton -->
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Escolha uma opção:" HorizontalOptions="Start" />
+                    <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                        <RadioButton x:Name="GuideRadioButton"
+                                     Content="Guia"
+                                     GroupName="RoleGroup"
+                                     Value="Guia"
+                                     IsChecked="False"
+                                     CheckedChanged="OnRadioButtonCheckedChanged" />
+                        <RadioButton x:Name="AssistantRadioButton"
+                                     Content="Assistente de Guia"
+                                     GroupName="RoleGroup"
+                                     Value="Assistente"
+                                     IsChecked="False"
+                                     CheckedChanged="OnRadioButtonCheckedChanged" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Área dos botões -->
+        <HorizontalStackLayout Grid.Row="2" 
+                               Padding="10" 
+                               Spacing="20"
+                               HorizontalOptions="Center">
+            <!-- Botão Fechar -->
+            <Button Text="Fechar"
+                    Clicked="OnCloseClicked"
+                    TextColor="White"
+                    BackgroundColor="Gray">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Gray"/>
+                                <Setter Property="TextColor" Value="White"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Red"/>
+                                <Setter Property="TextColor" Value="Black"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Button>
+
+            <!-- Botão Confirm desativado inicialmente -->
+            <Button x:Name="ConfirmButton"
+                    Text="Confirm"
+                    Clicked="OnConfirmClicked"
+                    IsEnabled="False" />
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

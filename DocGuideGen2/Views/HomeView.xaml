@@ -10,11 +10,9 @@
         Spacing="10">
 
         <Label
-            Text="Bem-vindo ao HomeView!"
+            Text="Bem-vindo ao WeLoveChile - GuideGen"
             FontSize="24"
             HorizontalOptions="Center" />
-
-        <!-- Seus componentes... -->
 
     </VerticalStackLayout>
 

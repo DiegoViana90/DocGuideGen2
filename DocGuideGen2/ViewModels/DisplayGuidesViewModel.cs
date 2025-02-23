@@ -1,8 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using DocGuideGen2.Models;
 using DocGuideGen2.Services;
+using DocGuideGen2.Views;
+using Microsoft.Maui.Controls;
 
 namespace DocGuideGen2.ViewModels
 {
@@ -14,6 +18,7 @@ namespace DocGuideGen2.ViewModels
         private bool _isEmpty;
 
         public ObservableCollection<Guide> Guides { get; set; }
+        public ICommand EditCommand { get; } // Comando para edição
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -23,6 +28,11 @@ namespace DocGuideGen2.ViewModels
             Guides = new ObservableCollection<Guide>();
             SelectedFilter = "Todos";
             PlaceholderText = "(Exibindo todos os guias e assistentes...)";
+
+            // Inicializa o comando de edição
+            EditCommand = new Command<Guide>(OnEdit);
+
+            // Carrega os guias
             LoadGuidesAsync(SelectedFilter);
         }
 
@@ -97,6 +107,28 @@ namespace DocGuideGen2.ViewModels
 
             IsEmpty = Guides.Count == 0;
         }
+
+        private async void OnEdit(Guide guide)
+        {
+            if (guide == null)
+                return;
+
+            // Verifica se a Navigation está disponível
+            if (Application.Current?.MainPage?.Navigation != null)
+            {
+                // Passa o callback para atualizar a lista após salvar
+                await Application.Current.MainPage.Navigation.PushModalAsync(new EditGuidePage(guide, async () =>
+                {
+                    await LoadGuidesAsync(SelectedFilter); // Recarrega a lista após salvar
+                }));
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Erro", "Não foi possível abrir o modal.", "OK");
+            }
+        }
+
+
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

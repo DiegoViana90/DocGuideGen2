@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DocGuideGen2.Views.EditGuidePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Editar Guia"
+    Padding="20"
+    BackgroundColor="#1E1E1E">
+
+    <VerticalStackLayout
+        HorizontalOptions="Center"
+        Spacing="20"
+        VerticalOptions="Center">
+        <!--  Título  -->
+        <Label
+            FontSize="24"
+            HorizontalOptions="Center"
+            Text="Editar Guia"
+            TextColor="White" />
+
+        <!--  Campo Nome  -->
+        <Entry
+            BackgroundColor="#2D2D2D"
+            HorizontalTextAlignment="Center"
+            Placeholder="Nome"
+            PlaceholderColor="Gray"
+            Text="{Binding Guide.Name}"
+            TextColor="White"
+            WidthRequest="250" />
+
+        <!--  Campo Tipo  -->
+        <Picker
+            Title="Tipo"
+            BackgroundColor="#2D2D2D"
+            HorizontalOptions="Center"
+            SelectedItem="{Binding Guide.DisplayType, Mode=TwoWay}"
+            TextColor="White"
+            TitleColor="Gray"
+            WidthRequest="250">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Guia</x:String>
+                    <x:String>Assistente de Guia</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+
+        <!--  Campo Registro  -->
+        <Entry
+            BackgroundColor="#2D2D2D"
+            HorizontalTextAlignment="Center"
+            Placeholder="Registro"
+            PlaceholderColor="Gray"
+            Text="{Binding Guide.Registry}"
+            TextColor="White"
+            WidthRequest="250" />
+
+        <!--  Campo RUT  -->
+        <Entry
+            BackgroundColor="#2D2D2D"
+            HorizontalTextAlignment="Center"
+            Placeholder="RUT"
+            PlaceholderColor="Gray"
+            Text="{Binding Guide.Rut}"
+            TextColor="White"
+            WidthRequest="250" />
+
+        <!--  Botões (Cancelado primeiro, Salvar depois)  -->
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+            <Button
+                BackgroundColor="Gray"
+                Command="{Binding CancelCommand}"
+                Text="Cancelar"
+                TextColor="White" />
+
+            <Button
+                BackgroundColor="#007ACC"
+                Command="{Binding SaveCommand}"
+                Text="Salvar"
+                TextColor="White" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

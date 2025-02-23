@@ -202,18 +202,35 @@
                                 VerticalTextAlignment="Center" />
                         </Border>
 
-                        <!--  Ações  -->
+                        <!--  Ações com Emojis  -->
                         <Border
                             Grid.Column="4"
                             BackgroundColor="#2D2D2D"
                             HorizontalOptions="Center"
                             Stroke="Transparent"
                             StrokeThickness="0.5">
-                            <Button
-                                BackgroundColor="#007ACC"
-                                Text="Ações"
-                                TextColor="White" />
+                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                                <!--  Ícone de Edição (emoji de lápis) com clique  -->
+                                <!--  Ícone de Edição (emoji de lápis) com clique  -->
+                                <Label
+                                    FontSize="20"
+                                    HorizontalOptions="Center"
+                                    Text="✏️">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditCommand}" CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+
+
+                                <!--  Ícone de Exclusão (emoji de lixeira)  -->
+                                <Label
+                                    FontSize="20"
+                                    HorizontalOptions="Center"
+                                    Text="🗑️" />
+                            </HorizontalStackLayout>
                         </Border>
+
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
